@@ -1,0 +1,141 @@
+1. Entities and Attributes
+Gymnasium
+
+GymID (PK)
+
+Name
+
+Address
+
+Telephone
+
+Member
+
+MemberID (PK) – unique identifier
+
+LastName
+
+FirstName
+
+Address
+
+DateOfBirth
+
+Gender
+
+Session
+
+SessionID (PK)
+
+SportType
+
+Schedule
+
+MaxCapacity (≤ 20)
+
+Coach
+
+CoachID (PK)
+
+LastName
+
+FirstName
+
+Age
+
+Specialty
+
+2. Relationships
+Registration
+
+Member ⟷ Gymnasium
+
+A member registers at exactly one gymnasium
+
+A gymnasium has many members
+
+Cardinality
+
+Gymnasium (1) —— (N) Member
+
+Attendance
+
+Member ⟷ Session
+
+A member can attend multiple sessions
+
+A session can have up to 20 members
+
+Cardinality
+
+Member (N) —— (N) Session
+
+Constraint: max 20 members per session
+
+(Implemented via an associative entity, e.g. Attendance)
+
+Organization
+
+Gymnasium ⟷ Session
+
+A gymnasium organizes multiple sessions
+
+A session belongs to one gymnasium
+
+Cardinality
+
+Gymnasium (1) —— (N) Session
+
+Coaching
+
+Coach ⟷ Session
+
+A session is led by 1 or 2 coaches
+
+A coach can lead multiple sessions
+
+Cardinality
+
+Coach (N) —— (1..2) Session
+
+(Implemented via an associative entity, e.g. SessionCoach)
+
+3. Associative Entities (for M:N relationships)
+Attendance
+
+MemberID (FK)
+
+SessionID (FK)
+
+SessionCoach
+
+SessionID (FK)
+
+CoachID (FK)
+
+4. Simplified ER Diagram (Textual)
+Gymnasium (1) ─────── (N) Member
+     |
+     | (1)
+     |
+    (N)
+  Session (N) ─────── (N) Member
+     |
+     | (1..2)
+     |
+    (N)
+   Coach
+
+5. Key Constraints Summary
+
+A member registers in one and only one gymnasium
+
+A session:
+
+Belongs to one gymnasium
+
+Has maximum 20 members
+
+Is led by at most 2 coaches
+
+Coaches and members can participate in multiple sessions
